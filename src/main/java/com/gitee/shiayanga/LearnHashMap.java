@@ -9,7 +9,7 @@ import java.util.HashMap;
  */
 public class LearnHashMap {
     public static void main(String[] args) throws Exception {
-        HashMap<String, Object> map = new HashMap<String, Object>(16);
+        HashMap<String, Object> map = new HashMap<String, Object>();
         // 获取阈值，HashMap不包含获取threshold的方法，所以使用getDeclaredField获取阈值
         Field tableField = map.getClass().getDeclaredField("table");
         tableField.setAccessible(true);
@@ -27,7 +27,7 @@ public class LearnHashMap {
         System.out.println("容量：" + capacityMethod.invoke(map) + "\t\t阈值：" + thresholdField.get(map) + "\t\t元素数量：" + map.size());
         System.out.println("---------------------------------------------------------");
 
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 15; i++) {
             // 当put进第一个元素时，因为此时节点长度是0，所以会先resize，然后再newNode
             map.put("a" + i, i);
             System.out.println("容量：" + capacityMethod.invoke(map) + "\t\t阈值：" + thresholdField.get(map) + "\t\t元素数量：" + map.size());
